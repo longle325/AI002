@@ -1,172 +1,225 @@
 <!DOCTYPE html>
 <html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <title>Phân Loại Comment</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.2/axios.min.js"></script>
     <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f8f9fa;
-        }
-        .container {
-            background-color: white;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        h1 {
-            color: #202124;
-            font-size: 24px;
-            margin-bottom: 20px;
-            font-weight: 400;
-        }
-        .input-container {
-            margin: 20px 0;
-            border-radius: 8px;
-            background: #fff;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-        textarea {
-            width: 100%;
-            min-height: 180px;
-            padding: 16px;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            font-family: inherit;
-            font-size: 16px;
-            line-height: 1.5;
-            color: #202124;
-            resize: vertical;
-            box-sizing: border-box;
-            transition: border-color 0.2s;
-        }
-        textarea:focus {
-            outline: none;
-            border-color: #4285f4;
-            box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.1);
-        }
-        textarea::placeholder {
-            color: #5f6368;
-        }
-        button {
-            background-color: #4285f4;
-            color: white;
-            padding: 12px 24px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: 500;
-            transition: background-color 0.2s;
-        }
-        button:hover {
-            background-color: #1a73e8;
-        }
-        button:disabled {
-            background-color: #dadce0;
-            cursor: not-allowed;
-        }
-        #result {
-            margin-top: 20px;
-            padding: 16px;
-            border-radius: 8px;
-            font-size: 16px;
-            line-height: 1.5;
-        }
-        .loading {
-            display: none;
-            margin: 10px 0;
-            color: #5f6368;
-            font-size: 14px;
-        }
-        .error {
-            color: #d93025;
-            margin: 10px 0;
-            font-size: 14px;
-        }
-        
-        /* Thêm hiệu ứng ripple cho button */
-        button {
-            position: relative;
-            overflow: hidden;
-        }
-        button:after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: rgba(255,255,255,0.2);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            transition: width 0.3s, height 0.3s;
-        }
-        button:active:after {
-            width: 200px;
-            height: 200px;
-        }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Arial, sans-serif;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f8f9fa;
+      }
+      .container {
+        background-color: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        color: #202124;
+        font-size: 24px;
+        margin-bottom: 20px;
+        font-weight: 400;
+      }
+      .input-container {
+        margin: 20px 0;
+        border-radius: 8px;
+        background: #fff;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
+      textarea {
+        width: 100%;
+        min-height: 180px;
+        padding: 16px;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        font-family: inherit;
+        font-size: 16px;
+        line-height: 1.5;
+        color: #202124;
+        resize: vertical;
+        box-sizing: border-box;
+        transition: border-color 0.2s;
+      }
+      textarea:focus {
+        outline: none;
+        border-color: #4285f4;
+        box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.1);
+      }
+      textarea::placeholder {
+        color: #5f6368;
+      }
+      button {
+        background-color: #4285f4;
+        color: white;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 500;
+        transition: background-color 0.2s;
+      }
+      button:hover {
+        background-color: #1a73e8;
+      }
+      button:disabled {
+        background-color: #dadce0;
+        cursor: not-allowed;
+      }
+      #result {
+        margin-top: 20px;
+        padding: 16px;
+        border-radius: 8px;
+        font-size: 16px;
+        line-height: 1.5;
+      }
+      .loading {
+        display: none;
+        margin: 10px 0;
+        color: #5f6368;
+        font-size: 14px;
+      }
+      .error {
+        color: #d93025;
+        margin: 10px 0;
+        font-size: 14px;
+      }
+
+      /* Thêm hiệu ứng ripple cho button */
+      button {
+        position: relative;
+        overflow: hidden;
+      }
+      button:after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        transition: width 0.3s, height 0.3s;
+      }
+      button:active:after {
+        width: 200px;
+        height: 200px;
+      }
+      .button-row {
+        display: flex;
+        align-items: center; /* Align the items vertically in the center */
+      }
+
+      .button-row button {
+        margin-right: 10px; /* Optional: space between the button and dropdown */
+      }
     </style>
-</head>
-<body>
-    <div class="container">
-        <h1>Hệ Thống Phân Loại Comment</h1>
-        <div class="input-container">
-            <textarea 
-                id="commentInput" 
-                placeholder="Nhập nội dung cần phân loại..."
-                spellcheck="false"
-            ></textarea>
-        </div>
+  </head>
+  <body>
+    <div class="container" style="position: relative">
+      <h1>Hệ Thống Phân Loại Comment</h1>
+      <div class="input-container">
+        <textarea
+          id="commentInput"
+          placeholder="Nhập nội dung cần phân loại..."
+          spellcheck="false"
+        ></textarea>
+      </div>
+      <div class="button-row">
         <button onclick="classifyComment()" id="submitButton">Phân Loại</button>
-        <div id="loading" class="loading">Đang phân tích...</div>
-        <div id="error" class="error"></div>
-        <div id="result"></div>
+        <div class="dropdown bottom-right">
+          <button
+            class="btn-primary"
+            id="menu1"
+            type="button"
+            data-toggle="dropdown"
+          >
+            Model đang sử dụng: <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+            <li role="presentation">
+              <a role="menuitem" tabindex="-1" href="#" class="dropdown-item" data-model="ChatGPT 4o">ChatGPT 4o</a>
+            </li>
+            <li role="presentation">
+              <a role="menuitem" tabindex="-1" href="#" class="dropdown-item" data-model="Gemini 2.0">Gemini 2.0</a>
+            </li>
+            <li role="presentation">
+              <a role="menuitem" tabindex="-1" href="#" class="dropdown-item" data-model="Llama 3.3">Llama 3.3</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div id="loading" class="loading">Đang phân tích...</div>
+      <div id="error" class="error"></div>
+      <div id="result"></div>
     </div>
 
     <script>
-        async function classifyComment() {
-            const commentInput = document.getElementById('commentInput');
-            const resultDiv = document.getElementById('result');
-            const loadingDiv = document.getElementById('loading');
-            const errorDiv = document.getElementById('error');
-            const submitButton = document.getElementById('submitButton');
+    let current = "ChatGPT 4o";
+    const prefix = 'Model đang sử dụng: '
+    document.getElementById("menu1").textContent = prefix+current
+    function handleModelSelection(model) {
+        current = model
+        console.log('Selected model:', model);
+        document.getElementById("menu1").textContent = prefix+current
+    }
 
-            const comment = commentInput.value.trim();
-            if (!comment) {
-                return;
-            }
+      async function classifyComment() {
+        const commentInput = document.getElementById("commentInput");
+        const resultDiv = document.getElementById("result");
+        const loadingDiv = document.getElementById("loading");
+        const errorDiv = document.getElementById("error");
+        const submitButton = document.getElementById("submitButton");
 
-            loadingDiv.style.display = 'block';
-            resultDiv.textContent = '';
-            errorDiv.textContent = '';
-            submitButton.disabled = true;
-
-            try {
-                const response = await axios.post('/api/classify', {
-                    comment: comment
-                });
-
-                const result = response.data.result;
-                resultDiv.textContent = result;
-                
-                if (result.startsWith('1')) {
-                    resultDiv.style.backgroundColor = '#fce8e6';
-                } else {
-                    resultDiv.style.backgroundColor = '#e6f4ea';
-                }
-            } catch (error) {
-                errorDiv.textContent = 'Có lỗi xảy ra: ' + (error.response?.data?.error || error.message);
-            } finally {
-                loadingDiv.style.display = 'none';
-                submitButton.disabled = false;
-            }
+        const comment = commentInput.value.trim();
+        if (!comment) {
+          return;
         }
+
+        loadingDiv.style.display = "block";
+        resultDiv.textContent = "";
+        errorDiv.textContent = "";
+        submitButton.disabled = true;
+
+        try {
+          const response = await axios.post("/api/classify", {
+            comment: comment,
+            model: current,
+          });
+
+          const result = response.data.result;
+          resultDiv.textContent = result;
+
+          if (result.startsWith("1")) {
+            resultDiv.style.backgroundColor = "#fce8e6";
+          } else {
+            resultDiv.style.backgroundColor = "#e6f4ea";
+          }
+        } catch (error) {
+          errorDiv.textContent =
+            "Có lỗi xảy ra: " + (error.response?.data?.error || error.message);
+        } finally {
+          loadingDiv.style.display = "none";
+          submitButton.disabled = false;
+        }
+      }
+    $(document).on('click', '.dropdown-item', function() {
+      const selectedModel = $(this).data('model');
+      handleModelSelection(selectedModel);
+    });
     </script>
-</body>
+  </body>
 </html>
