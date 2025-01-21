@@ -147,7 +147,7 @@
             type="button"
             data-toggle="dropdown"
           >
-            Model đang sử dụng: <span class="caret"></span>
+          <span class="caret"></span>
           </button>
           <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
             <li role="presentation">
@@ -169,7 +169,7 @@
 
     <script>
     let current = "ChatGPT 4o";
-    const prefix = 'Model đang sử dụng: '
+    const prefix = ''
     document.getElementById("menu1").textContent = prefix+current
     function handleModelSelection(model) {
         current = model
