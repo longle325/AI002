@@ -1,6 +1,6 @@
 # AI002 Project
 
-This project provides a framework for [describe the project's purpose, e.g., building a search system with ElasticSearch integration].
+This project provides a solution for vietnamese reactionary comments detector on social media platforms
 
 ## Table of Contents
 - [Installation](#installation)
